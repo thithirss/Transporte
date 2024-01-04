@@ -1,0 +1,80 @@
+label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Reset de estilos para remover margens e preenchimentos padrão */
+body, h1, form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo básico para o corpo da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilo para o cabeçalho (h1) */
+h1 {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #007BFF;
+    color: #fff;
+}
+
+/* Estilo para o formulário */
+form {
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para rótulos */
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+/* Estilo para inputs de texto */
+input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    box-sizing: border-box;
+}
+
+/* Estilo para o botão */
+button {
+    background-color: #007BFF;
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para o resultado do frete */
+#valorFrete {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+/* Estilo para a quebra de linha */
+br {
+    margin-bottom: 10px;
+}

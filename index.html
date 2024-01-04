@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Transporte</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+
+    <h1>Gestão de Transporte</h1>
+
+    <form id="transportForm">
+        <label for="pontoPartida">Ponto de Partida:</label>
+        <input type="text" id="pontoPartida" required>
+        
+        <label for="pontoDestino">Ponto de Destino:</label>
+        <input type="text" id="pontoDestino" required>
+        <br><br>
+
+        <button type="button" onclick="calcularFrete()">Calcular Frete</button>
+
+        <br><br>
+        <label for="valorFrete">Valor do Frete:</label>
+        <input type="text" id="valorFrete" readonly>
+    </form>
+
+    <script src="script.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHsU4Srk41dX1SZlZDN6dDxcUT64oMdpo&libraries=places&callback=inicializarAutocomplete" async defer></script>
+
+</body>
+</html>
