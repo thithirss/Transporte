@@ -126,3 +126,22 @@ function calcularFrete() {
 }
 
 console.log("distanciaKm:", distanciaKm);
+
+function atualizarValores() {
+    var kmporlitro = document.getElementById("kmporlitro").value;
+    var precoGasolina = document.getElementById("precoGasolina").value;
+
+    var database = firebase.database();
+    var configRef = database.ref('configuracoes');
+
+    configRef.update({
+        KmPorLitro: parseFloat(kmporlitro),
+        PrecoGasolina: parseFloat(precoGasolina)
+    })
+    .then(function() {
+        alert('Valores atualizados com sucesso!');
+    })
+    .catch(function(error) {
+        console.error('Erro ao atualizar valores: ', error);
+    });
+}
