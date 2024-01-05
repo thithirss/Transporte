@@ -52,8 +52,63 @@ function atualizarValores() {
 }
 
 
-function calcularFrete() {
+// function calcularFrete() {
 
+//     var pontoPartida = document.getElementById("pontoPartida").value;
+//     var pontoDestino = document.getElementById("pontoDestino").value;
+
+//     if (pontoPartida === "" || pontoDestino === "") {
+//         alert('Por favor, preencha os pontos de partida e destino.');
+//         return;
+//     }
+
+//     var service = new google.maps.DistanceMatrixService();
+//     service.getDistanceMatrix(
+//         {
+//             origins: [pontoPartida],
+//             destinations: [pontoDestino],
+//             travelMode: 'DRIVING',
+//             unitSystem: google.maps.UnitSystem.METRIC,
+//         },
+//         function (response, status) {
+//             if (status === 'OK') {
+
+//                 var distanciaKm = response.rows[0].elements[0].distance.value / 1000;
+
+//                 var kmPorLitro = 10;
+//                 var precoGasolina = 5.89;
+
+//                 var custoFrete = (distanciaKm / kmPorLitro) * precoGasolina;
+
+
+//                 document.getElementById("valorFrete").value = `Distância: ${distanciaKm.toFixed(2)} km | Valor do Frete: ${custoFrete.toFixed(2)}`;
+//             } else {
+//                 alert('Erro ao calcular a distância: ' + status);
+//             }
+//         }
+//     );
+// }
+
+
+// Verifique se o aplicativo Firebase já foi inicializado
+if (!firebase.apps.length) {
+    // Se não foi inicializado, inicialize o Firebase com sua configuração
+    var firebaseConfig = { 
+        apiKey: "AIzaSyDHsU4Srk41dX1SZlZDN6dDxcUT64oMdpo",
+        authDomain: "teste-410118.firebaseapp.com",
+        databaseURL: "https://teste-410118-default-rtdb.firebaseio.com",
+        projectId: "teste-410118",
+        storageBucket: "teste-410118.appspot.com",
+        messagingSenderId: "614628768652",
+        appId: "1:614628768652:web:c80d9a111a20aaf07d74a9",
+        measurementId: "G-Q7X7Y9Q30S"
+
+};
+
+    firebase.initializeApp(firebaseConfig);
+}
+
+function calcularFrete() {
     var pontoPartida = document.getElementById("pontoPartida").value;
     var pontoDestino = document.getElementById("pontoDestino").value;
 
@@ -62,38 +117,42 @@ function calcularFrete() {
         return;
     }
 
-    var service = new google.maps.DistanceMatrixService();
-    service.getDistanceMatrix(
-        {
-            origins: [pontoPartida],
-            destinations: [pontoDestino],
-            travelMode: 'DRIVING',
-            unitSystem: google.maps.UnitSystem.METRIC,
-        },
-        function (response, status) {
-            if (status === 'OK') {
+    // Recupere os valores do banco de dados Firebase
+    var database = firebase.database();
+    var configRef = database.ref('configuracoes');
 
-                var distanciaKm = response.rows[0].elements[0].distance.value / 1000;
+    configRef.once('value')
+        .then(function(snapshot) {
+            // Verifique se o snapshot não é nulo ou indefinido
+            if (snapshot && snapshot.exists()) {
+                var configuracoes = snapshot.val();
+                var kmPorLitro = configuracoes.KmPorLitro;
+                var precoGasolina = configuracoes.PrecoGasolina;
 
-                var kmPorLitro = 10;
-                var precoGasolina = 5.89;
+                var service = new google.maps.DistanceMatrixService();
+                service.getDistanceMatrix(
+                    {
+                        origins: [pontoPartida],
+                        destinations: [pontoDestino],
+                        travelMode: 'DRIVING',
+                        unitSystem: google.maps.UnitSystem.METRIC,
+                    },
+                    function (response, status) {
+                        if (status === 'OK') {
+                            var distanciaKm = response.rows[0].elements[0].distance.value / 1000;
+                            var custoFrete = (distanciaKm / kmPorLitro) * precoGasolina;
 
-                var custoFrete = (distanciaKm / kmPorLitro) * precoGasolina;
-
-
-                document.getElementById("valorFrete").value = `Distância: ${distanciaKm.toFixed(2)} km | Valor do Frete: ${custoFrete.toFixed(2)}`;
+                            document.getElementById("valorFrete").value = `Distância: ${distanciaKm.toFixed(2)} km | Valor do Frete: ${custoFrete.toFixed(2)}`;
+                        } else {
+                            alert('Erro ao calcular a distância: ' + status);
+                        }
+                    }
+                );
             } else {
-                alert('Erro ao calcular a distância: ' + status);
+                alert('Dados de configuração não encontrados no Firebase.');
             }
-        }
-    );
-}
-
-function carregarConfiguracoes() {
-
-    var kmPorLitro = document.getElementById('kmporlitro').value;
-    var precoGasolina = document.getElementById('precoGasolina').value;
-
-    document.getElementById('kmPorLitroPrincipal').value = kmPorLitro;
-    document.getElementById('precoGasolinaPrincipal').value = precoGasolina;
+        })
+        .catch(function(error) {
+            console.error('Erro ao recuperar dados do Firebase: ', error);
+        });
 }
