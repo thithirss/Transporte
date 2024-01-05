@@ -40,7 +40,6 @@ function calcularDistancia() {
     }
 }
 
-
 function atualizarValores() {
     var kmporlitro = document.getElementById("kmporlitro").value;
     var precoGasolina = document.getElementById("precoGasolina").value;
@@ -51,49 +50,9 @@ function atualizarValores() {
     alert('Valores atualizados com sucesso!');
 }
 
-
-// function calcularFrete() {
-
-//     var pontoPartida = document.getElementById("pontoPartida").value;
-//     var pontoDestino = document.getElementById("pontoDestino").value;
-
-//     if (pontoPartida === "" || pontoDestino === "") {
-//         alert('Por favor, preencha os pontos de partida e destino.');
-//         return;
-//     }
-
-//     var service = new google.maps.DistanceMatrixService();
-//     service.getDistanceMatrix(
-//         {
-//             origins: [pontoPartida],
-//             destinations: [pontoDestino],
-//             travelMode: 'DRIVING',
-//             unitSystem: google.maps.UnitSystem.METRIC,
-//         },
-//         function (response, status) {
-//             if (status === 'OK') {
-
-//                 var distanciaKm = response.rows[0].elements[0].distance.value / 1000;
-
-//                 var kmPorLitro = 10;
-//                 var precoGasolina = 5.89;
-
-//                 var custoFrete = (distanciaKm / kmPorLitro) * precoGasolina;
-
-
-//                 document.getElementById("valorFrete").value = `Distância: ${distanciaKm.toFixed(2)} km | Valor do Frete: ${custoFrete.toFixed(2)}`;
-//             } else {
-//                 alert('Erro ao calcular a distância: ' + status);
-//             }
-//         }
-//     );
-// }
-
-
-// Verifique se o aplicativo Firebase já foi inicializado
 if (!firebase.apps.length) {
-    // Se não foi inicializado, inicialize o Firebase com sua configuração
-    var firebaseConfig = { 
+
+    var firebaseConfig = {
         apiKey: "AIzaSyDHsU4Srk41dX1SZlZDN6dDxcUT64oMdpo",
         authDomain: "teste-410118.firebaseapp.com",
         databaseURL: "https://teste-410118-default-rtdb.firebaseio.com",
@@ -103,10 +62,14 @@ if (!firebase.apps.length) {
         appId: "1:614628768652:web:c80d9a111a20aaf07d74a9",
         measurementId: "G-Q7X7Y9Q30S"
 
-};
+    };
 
     firebase.initializeApp(firebaseConfig);
 }
+
+console.log("KmPorLitro:", KmPorLitro);
+console.log("precoGasolina:", precoGasolina);
+
 
 function calcularFrete() {
     var pontoPartida = document.getElementById("pontoPartida").value;
@@ -117,17 +80,17 @@ function calcularFrete() {
         return;
     }
 
-    // Recupere os valores do banco de dados Firebase
+
     var database = firebase.database();
     var configRef = database.ref('configuracoes');
 
     configRef.once('value')
         .then(function(snapshot) {
-            // Verifique se o snapshot não é nulo ou indefinido
+
             if (snapshot && snapshot.exists()) {
                 var configuracoes = snapshot.val();
-                var kmPorLitro = configuracoes.KmPorLitro;
-                var precoGasolina = configuracoes.PrecoGasolina;
+                var kmPorLitro = parseFloat(configuracoes.KmPorLitro);
+                var precoGasolina = parseFloat(configuracoes.PrecoGasolina);
 
                 var service = new google.maps.DistanceMatrixService();
                 service.getDistanceMatrix(
@@ -140,9 +103,14 @@ function calcularFrete() {
                     function (response, status) {
                         if (status === 'OK') {
                             var distanciaKm = response.rows[0].elements[0].distance.value / 1000;
-                            var custoFrete = (distanciaKm / kmPorLitro) * precoGasolina;
 
-                            document.getElementById("valorFrete").value = `Distância: ${distanciaKm.toFixed(2)} km | Valor do Frete: ${custoFrete.toFixed(2)}`;
+                            if (kmPorLitro !== 0) {
+                                var custoFrete = (distanciaKm / kmPorLitro) * precoGasolina;
+
+                                document.getElementById("valorFrete").value = `Distância: ${distanciaKm.toFixed(2)} km | Valor do Frete: ${custoFrete.toFixed(2)}`;
+                            } else {
+                                alert('Erro: kmPorLitro é zero.');
+                            }
                         } else {
                             alert('Erro ao calcular a distância: ' + status);
                         }
@@ -156,3 +124,5 @@ function calcularFrete() {
             console.error('Erro ao recuperar dados do Firebase: ', error);
         });
 }
+
+console.log("distanciaKm:", distanciaKm);
