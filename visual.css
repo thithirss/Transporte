@@ -1,0 +1,61 @@
+/* Estilos Gerais */
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #F4F4F4;
+}
+
+/* Estilos para o Formulário */
+form {
+    width: 80%;
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #FFF;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #E4E4E4;
+    border-radius: 3px;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: #FFF;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+form button:hover {
+    background-color: #0056b3;
+}
+
+form input[type="text"]:read-only {
+    background-color: #F5F5F5;
+}
+
+form #enviarWhatsappBotao {
+    background-color: #28a745;
+}
+
+form #enviarWhatsappBotao:hover {
+    background-color: #218838;
+}
