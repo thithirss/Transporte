@@ -105,3 +105,30 @@ button:hover {
 br {
     margin-bottom: 15px;
 }
+
+
+/* Estilo para a seção de rodapé (copyright) */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #333;
+    color: #fff;
+
+    bottom: 0;
+    width: 100%;
+}
+
+footer p {
+    font-size: 0.9em;
+}
+
+/* Adicione um estilo extra se desejar um link para sua política de privacidade, por exemplo */
+footer a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
