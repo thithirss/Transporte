@@ -134,9 +134,6 @@ footer a:hover {
 }
 
 
-/* Adicione estas regras no final do seu arquivo CSS */
-
-/* Estilo para dispositivos móveis */
 /* Seu estilo padrão aqui */
 
 /* Estilo para dispositivos móveis em geral */
@@ -149,6 +146,7 @@ footer a:hover {
     form {
         max-width: 100%;
         padding: 15px;
+        margin: 0 10px; /* Adiciona uma margem de 10px nos lados do formulário */
     }
 
     label {
@@ -190,6 +188,7 @@ footer a:hover {
     form {
         max-width: 90%;
         padding: 20px;
+        margin: 0 auto; /* Centraliza o formulário */
     }
 
     label {
@@ -220,4 +219,3 @@ footer a:hover {
         font-size: 1em;
     }
 }
-
