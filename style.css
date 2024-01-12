@@ -3,6 +3,7 @@ body, h1, form, label, input, button {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+ 
 }
 
 /* Estilo básico para o corpo da página */
@@ -20,9 +21,11 @@ h1 {
     padding: 30px 0;
     background-color: #007BFF;
     color: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    border-radius: 8px;
     font-size: 2em;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
 }
 
 /* Estilo para o formulário */
@@ -115,6 +118,7 @@ footer {
     color: #fff;
     bottom: 0;
     width: 100%;
+    border-radius: 8px;
 }
 
 footer p {
@@ -145,7 +149,7 @@ footer a:hover {
     form {
         max-width: 100%;
         padding: 15px;
-        margin: 0 10px; /* Adiciona uma margem de 10px nos lados do formulário */
+        margin: 0 10px; 
     }
 
     label {
@@ -177,44 +181,4 @@ footer a:hover {
     }
 }
 
-/* Estilo para o iPhone XR (828x1792 pixels) */
-@media only screen and (min-width: 601px) and (max-width: 828px) {
-    h1 {
-        font-size: 1.8em;
-        padding: 25px 0;
-    }
 
-    form {
-        max-width: 90%;
-        padding: 20px;
-        margin: 0 auto; /* Centraliza o formulário */
-    }
-
-    label {
-        font-size: 1.1em;
-    }
-
-    input[type="text"],
-    input[type="number"] {
-        padding: 12px;
-        margin-bottom: 20px;
-    }
-
-    button {
-        padding: 15px 18px;
-        font-size: 1.1em;
-    }
-
-    #valorfrete {
-        padding: 12px;
-        margin-bottom: 20px;
-    }
-
-    footer {
-        padding: 20px 0;
-    }
-
-    footer p {
-        font-size: 1em;
-    }
-}
